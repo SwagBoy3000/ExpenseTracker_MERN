@@ -1,10 +1,10 @@
 import React from 'react'
 import { Navigate, Route, Routes } from 'react-router'
-import {Login} from './pages/Auth/Login.jsx'
-import {SignUp} from './pages/Auth/SignUp.jsx'
-import {Home} from './pages/Dashboard/Home.jsx'
-import {Expense} from './pages/Dashboard/Expense.jsx'
-import {Income} from './pages/Dashboard/Income.jsx'
+import Login from './pages/Auth/Login.jsx'
+import SignUp from './pages/Auth/SignUp.jsx'
+import Home from './pages/Dashboard/Home.jsx'
+import Expense from './pages/Dashboard/Expense.jsx'
+import Income from './pages/Dashboard/Income.jsx'
 
 
 const App = () => {
