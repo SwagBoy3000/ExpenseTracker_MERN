@@ -5,6 +5,9 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import connectDB from './config/db.js'
 import authRoutes from './routes/authRoutes.js'
+import incomeRoutes from './routes/incomeRoutes.js'
+import expenseRoutes from './routes/expenseRoutes.js'
+
 
 dotenv.config();
 
@@ -24,6 +27,10 @@ app.use(
 app.use(express.json())
 
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/income", incomeRoutes);
+app.use("/api/v1/expense", expenseRoutes);
+
+
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
