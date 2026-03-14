@@ -5,11 +5,15 @@ import Input from '../../components/inputs/input';
 import {validateEmail} from '../../utils/helper.js'
 import axiosInstance from '../../utils/axiosInstance.js';
 import { API_PATHS } from '../../utils/apiPaths.js';
+import { useContext } from 'react';
+import { UserContext } from '../../context/userContex.jsx';
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+
+  const {updateUser} = useContext(UserContext);
 
   const navigate = useNavigate(); 
 
@@ -35,7 +39,7 @@ const Login = () => {
 
     try {
       
-      const response = axiosInstance.post(API_PATHS.AUTH.LOGIN,{
+      const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN,{
         email,
         password,
       })
@@ -45,6 +49,7 @@ const Login = () => {
       if (token) {
         
         localStorage.setItem("token", token)
+        updateUser(user)
         navigate('/dashboard')
 
       }

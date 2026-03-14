@@ -8,14 +8,14 @@ const generateToken = (id) => {
 export async function registerUser(req,res) {
     const { fullName, email, password, profileImageUrl} = req.body;
 
-    if(!fullName || !email || !password || !profileImageUrl){
-        res.status(400).json({message : "Enter all credentials"})
+    if(!fullName || !email || !password){
+        return res.status(400).json({message : "Enter all credentials"})
     }
     try{
         
         const existingUser = await User.findOne({email});
         if(existingUser){
-            res.status(400).json({message : "email already is use"})
+            return res.status(400).json({message : "email already is use"})
         }
         
         const newUser = new User({fullName, email, password, profileImageUrl})

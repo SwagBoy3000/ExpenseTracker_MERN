@@ -4,6 +4,11 @@ import Input from '../../components/inputs/input';
 import {validateEmail} from '../../utils/helper.js'
 import React, { useState }  from 'react'
 import ProfilePictureSelector from '../../components/inputs/ProfilePictureSelector.jsx';
+import { API_PATHS } from '../../utils/apiPaths.js';
+import axiosInstance from '../../utils/axiosInstance.js';
+import { useContext } from 'react';
+import { UserContext } from '../../context/userContex.jsx';
+import uploadImage from '../../utils/uploadImage.js';
 
 const SignUp = () => {
 
@@ -13,6 +18,9 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
 
   const [error, setError] = useState(null);
+
+  const {updateUser} = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -33,6 +41,46 @@ const SignUp = () => {
     }
 
     setError("");
+
+    try {
+
+      if(profilePic){
+
+        const imgUploadRes = await uploadImage(profilePic)
+        profileImageUrl = imgUploadRes.imageUrl || ""
+
+      }
+      
+      const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER,{
+        fullName,
+        email,
+        password,
+        profileImageUrl,
+      })
+
+      const { token , user } = response.data;
+
+      if (token) {
+        
+        localStorage.setItem("token", token)
+        updateUser(user)
+        navigate('/dashboard')
+
+      }
+
+    } catch (error) {
+      
+      if (error.response && error.response.data.message) {
+
+        setError(error.response.data.message);
+
+      } else {
+
+        setError("Something went wrong. Please try again.");
+
+      }
+
+    }
   }
 
   return (
