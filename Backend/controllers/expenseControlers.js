@@ -2,11 +2,13 @@ import Expense from '../models/Expense.js'
 import xlsx from 'xlsx'
 
 export async function addExpense(req,res) {
+
     const userId = req.user.id
+
     try {
         const {icon, category, amount,  date} = req.body
         
-        if (!source || !amount || !date) {
+        if (!category || !amount || !date) {
             res.status(400).json({message : 'All fields are required'})
         }
 
@@ -15,8 +17,11 @@ export async function addExpense(req,res) {
         await newExpense.save()
 
         res.status(200).json(newExpense)
+
     } catch (error) {
+
         res.status(500).json({message : 'Server error'})
+        
     }
 }
 
