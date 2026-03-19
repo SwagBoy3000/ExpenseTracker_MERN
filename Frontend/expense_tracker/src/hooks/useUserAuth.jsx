@@ -19,7 +19,7 @@ export const useUserAuth = () => {
 
             try {
                 
-                const response =  await axiosInstance.get(API_PATHS.AUTH.GET_USER_INFO)
+                const response =  await axiosInstance.get(API_PATHS.AUTH.GET_USER)
 
                 if (isMounted && response.data) {
                     
