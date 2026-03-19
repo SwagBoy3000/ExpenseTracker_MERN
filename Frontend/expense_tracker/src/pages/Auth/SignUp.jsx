@@ -7,7 +7,7 @@ import ProfilePictureSelector from '../../components/inputs/ProfilePictureSelect
 import { API_PATHS } from '../../utils/apiPaths.js';
 import axiosInstance from '../../utils/axiosInstance.js';
 import { useContext } from 'react';
-import { UserContext } from '../../context/userContex.jsx';
+import { UserContext } from '../../context/userContext.jsx';
 import uploadImage from '../../utils/uploadImage.js';
 
 const SignUp = () => {
