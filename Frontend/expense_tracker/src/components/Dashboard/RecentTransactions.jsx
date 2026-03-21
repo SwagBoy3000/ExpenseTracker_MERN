@@ -11,6 +11,21 @@ const RecentTransactions = ({transactions, onSeeMore}) => {
                 See All <LuArrowRight className='text-base' />
             </button>
         </div>
+
+        <div>
+
+          {transactions?.slice(0,5)?.map( (item) => (
+            <TransactionInfoCard 
+            key = {item._id}
+            title = {item.type == 'expense' ? item.category : item.source}
+            iocn = {item.icon}
+            date = {moment(item.date).format('do MMM YYYY')}
+            amount = {item.amount}
+            type
+            />
+          ))}
+
+        </div>
     </div>
   )
 }
