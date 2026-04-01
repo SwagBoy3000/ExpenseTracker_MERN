@@ -11,6 +11,7 @@ import {IoMdCard} from 'react-icons/io'
 import { addThousandsSeparator } from '../../utils/helper'
 import RecentTransactions from '../../components/Dashboard/RecentTransactions'
 import FinanceOverview from '../../components/Dashboard/FinanceOverview'
+import ExpenseTransaction from '../../components/Dashboard/ExpenseTransaction'
 
 const Home = () => {
 
@@ -98,7 +99,12 @@ const Home = () => {
         />
 
         <ExpenseTransaction 
-          
+          transactions = {dashboardData?.last30DaysExpenses?.transactions || [] } 
+          onSeeMore = {() => navigate("/expense")}
+        />
+
+        <Las30DaysExpenses 
+          data = {}
         />
 
       </div>
